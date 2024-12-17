@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api")
-public class HelloKanban {
+@Controller
+public class IndexKanban {
     @GetMapping("/hello")
     public String helloKanban() {
-        return "Hello Kanban!";
+        return "index";
     }
 }

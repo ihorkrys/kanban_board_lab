@@ -1,1 +1,13 @@
-spring.application.name=KanBan
+spring:
+  application:
+    name: KanBan
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kanban_app
+    username: auto_test
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: kanban_app

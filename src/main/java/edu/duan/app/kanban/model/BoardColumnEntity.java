@@ -6,7 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Builder
+@Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardColumnEntity {
@@ -15,7 +15,7 @@ public class BoardColumnEntity {
     private String id;
     @Column(length = 100)
     private String name;
-    @Column(length = 25)
+    @Column(length = 25, unique = true, nullable = false)
     private String slug;
     @Column(length = 6)
     private String hexColor;

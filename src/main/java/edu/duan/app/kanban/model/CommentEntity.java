@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @Setter
-@Builder
+@Builder(setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentEntity {

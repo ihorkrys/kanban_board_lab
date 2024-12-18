@@ -1,48 +1,52 @@
 package edu.duan.app.kanban.controller;
 
 import edu.duan.app.kanban.api.board.column.*;
+import edu.duan.app.kanban.mapper.BoardColumnMapper;
+import edu.duan.app.kanban.service.BoardColumnService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/columns")
 public class BoardColumnController {
+    private final BoardColumnService boardColumnService;
+    private final BoardColumnMapper boardColumnMapper;
+
+    @Autowired
+    public BoardColumnController(BoardColumnService boardColumnService, BoardColumnMapper boardColumnMapper) {
+        this.boardColumnService = boardColumnService;
+        this.boardColumnMapper = boardColumnMapper;
+    }
+
     @PostMapping("/add")
     public ResponseEntity<AddBoardColumnResponse> addBoardColumn(@RequestBody AddBoardColumnRequest request) {
-        AddBoardColumnResponse response = new AddBoardColumnResponse(new BoardColumnDTO());
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        BoardColumnDTO createdColumn = boardColumnService.createBoardColumn(boardColumnMapper.toDTO(request));
+        return new ResponseEntity<>(new AddBoardColumnResponse(createdColumn), HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<UpdateBoardColumnResponse> updateBoardColumn(@RequestBody UpdateBoardColumnRequest request) {
-        UpdateBoardColumnResponse response = new UpdateBoardColumnResponse(new BoardColumnDTO());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        BoardColumnDTO updateColumn = boardColumnService.updateBoardColumn(boardColumnMapper.toDTO(request));
+        return new ResponseEntity<>(new UpdateBoardColumnResponse(updateColumn), HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<RemoveBoardColumnResponse> removeBoardColumn(@PathVariable String id) {
-        RemoveBoardColumnResponse response = new RemoveBoardColumnResponse();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        boardColumnService.deleteBoardColumn(id);
+        return new ResponseEntity<>(new RemoveBoardColumnResponse(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<GetBoardColumnResponse> getBoardColumn(@PathVariable String id) {
-        GetBoardColumnResponse response = new GetBoardColumnResponse(new BoardColumnDTO());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        BoardColumnDTO column = boardColumnService.getBoardColumnById(id);
+        return new ResponseEntity<>(new GetBoardColumnResponse(column), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<ListBoardColumnsResponse> listBoardColumns() {
-        List<BoardColumnDTO> columns = List.of(
-                new BoardColumnDTO(UUID.randomUUID().toString(), "To Do", "todo", "#FF5733", true, 1),
-                new BoardColumnDTO(UUID.randomUUID().toString(), "In Progress", "inprogress", "#33C4FF", true, 2),
-                new BoardColumnDTO(UUID.randomUUID().toString(), "Done", "done", "#33FF57", false, 3)
-        );
-        ListBoardColumnsResponse response = new ListBoardColumnsResponse(columns);
+        ListBoardColumnsResponse response = new ListBoardColumnsResponse(boardColumnService.getAllBoardColumns());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

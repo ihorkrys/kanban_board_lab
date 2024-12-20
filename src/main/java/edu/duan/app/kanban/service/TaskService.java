@@ -36,14 +36,14 @@ public class TaskService {
         return taskMapper.toDTO(taskEntity);
     }
 
-    public TaskDTO getTaskById(String id) {
+    public TaskDTO getTaskById(long id) {
         TaskEntity taskEntity = taskRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
         return taskMapper.toDTO(taskEntity);
     }
 
     @Transactional
-    public TaskDTO setColumnToTask(String taskId, String columnSlug) {
+    public TaskDTO setColumnToTask(long taskId, String columnSlug) {
         Optional<BoardColumnEntity> boardColumnEntity = boardColumnRepository.findBySlug(columnSlug);
         if (taskRepository.existsById(taskId) && boardColumnEntity.isPresent()) {
             TaskEntity taskEntity = taskRepository.getReferenceById(taskId);
@@ -66,7 +66,7 @@ public class TaskService {
         } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found");
     }
 
-    public void deleteTask(String id) {
+    public void deleteTask(long id) {
         taskRepository.deleteById(id);
     }
 }

@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class AppContextController {
     private final TaskService taskService;
     private final BoardColumnService boardColumnService;
+
     @Autowired
     public AppContextController(TaskService taskService, BoardColumnService boardColumnService) {
         this.taskService = taskService;

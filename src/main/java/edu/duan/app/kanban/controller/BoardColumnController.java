@@ -33,13 +33,13 @@ public class BoardColumnController {
     }
 
     @DeleteMapping("/remove/{id}")
-    public ResponseEntity<RemoveBoardColumnResponse> removeBoardColumn(@PathVariable String id) {
+    public ResponseEntity<RemoveBoardColumnResponse> removeBoardColumn(@PathVariable long id) {
         boardColumnService.deleteBoardColumn(id);
         return new ResponseEntity<>(new RemoveBoardColumnResponse(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetBoardColumnResponse> getBoardColumn(@PathVariable String id) {
+    public ResponseEntity<GetBoardColumnResponse> getBoardColumn(@PathVariable long id) {
         BoardColumnDTO column = boardColumnService.getBoardColumnById(id);
         return new ResponseEntity<>(new GetBoardColumnResponse(column), HttpStatus.OK);
     }

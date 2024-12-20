@@ -7,6 +7,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
+@Table(name = "task")
+@SequenceGenerator(
+        name = "task_generator",
+        sequenceName = "task_generator_seq",
+        initialValue = 100,
+        allocationSize = 1
+)
 @Getter
 @Setter
 @Builder(setterPrefix = "with")
@@ -14,8 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 public class TaskEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_generator")
+    private long id;
     @Column(length = 256)
     private String title;
     @Column(length = 5000)

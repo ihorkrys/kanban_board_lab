@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BoardColumnDTO {
 
-    private String id;
+    private long id;
 
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 100, message = "Name length must be less than or equal to 100 characters")

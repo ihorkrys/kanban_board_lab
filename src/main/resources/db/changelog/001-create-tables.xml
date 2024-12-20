@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1734717074044-1" author="ihorkr">
+        <createSequence incrementBy="1" sequenceName="b_column_generator_seq" startValue="100"/>
+    </changeSet>
+    <changeSet id="1734717074044-2" author="ihorkr">
+        <createSequence incrementBy="1" sequenceName="comment_generator_seq" startValue="100"/>
+    </changeSet>
+    <changeSet id="1734717074044-3" author="ihorkr">
+        <createSequence incrementBy="1" sequenceName="task_generator_seq" startValue="100"/>
+    </changeSet>
+    <changeSet id="1734717074044-4" author="ihorkr">
+        <createTable tableName="board_column">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_board_column"/>
+            </column>
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="slug" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hex_color" type="VARCHAR(7)"/>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734717074044-5" author="ihorkr">
+        <createTable tableName="comment">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_comment"/>
+            </column>
+            <column name="author" type="VARCHAR(100)"/>
+            <column name="content" type="VARCHAR(5000)"/>
+            <column name="publish_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734717074044-6" author="ihorkr">
+        <createTable tableName="task">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_task"/>
+            </column>
+            <column name="title" type="VARCHAR(256)"/>
+            <column name="description" type="VARCHAR(5000)"/>
+            <column name="assignee" type="VARCHAR(100)"/>
+            <column name="created_time" type="DATETIME"/>
+            <column name="deadline_time" type="DATETIME"/>
+            <column name="last_updated_time" type="DATETIME"/>
+            <column name="active_column_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734717074044-7" author="ihorkr">
+        <createTable tableName="task_commentaries">
+            <column name="task_entity_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentaries_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1734717074044-8" author="ihorkr">
+        <addUniqueConstraint columnNames="slug" constraintName="uc_board_column_slug" tableName="board_column"/>
+    </changeSet>
+    <changeSet id="1734717074044-9" author="ihorkr">
+        <addUniqueConstraint columnNames="commentaries_id" constraintName="uc_task_commentaries_commentaries"
+                             tableName="task_commentaries"/>
+    </changeSet>
+    <changeSet id="1734717074044-10" author="ihorkr">
+        <addForeignKeyConstraint baseColumnNames="active_column_id" baseTableName="task"
+                                 constraintName="FK_TASK_ON_ACTIVECOLUMN" referencedColumnNames="id"
+                                 referencedTableName="board_column"/>
+    </changeSet>
+    <changeSet id="1734717074044-11" author="ihorkr">
+        <addForeignKeyConstraint baseColumnNames="commentaries_id" baseTableName="task_commentaries"
+                                 constraintName="fk_tascom_on_comment_entity" referencedColumnNames="id"
+                                 referencedTableName="comment"/>
+    </changeSet>
+    <changeSet id="1734717074044-12" author="ihorkr">
+        <addForeignKeyConstraint baseColumnNames="task_entity_id" baseTableName="task_commentaries"
+                                 constraintName="fk_tascom_on_task_entity" referencedColumnNames="id"
+                                 referencedTableName="task"/>
+    </changeSet>
+
+</databaseChangeLog>

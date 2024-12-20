@@ -30,20 +30,20 @@ public class BoardColumnService {
         return boardColumnMapper.toDTO(boardColumnRepository.save(boardColumnMapper.toEntity(column)));
     }
 
-    public BoardColumnDTO getBoardColumnById(String id) {
+    public BoardColumnDTO getBoardColumnById(long id) {
         BoardColumnEntity boardColumnEntity = boardColumnRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Board column not found"));
         return boardColumnMapper.toDTO(boardColumnEntity);
     }
 
     public List<BoardColumnDTO> getAllBoardColumns() {
-        return boardColumnRepository.findAllSortedByPosition().stream()
+        return boardColumnRepository.findAllByOrderByPositionAsc().stream()
                 .map(boardColumnMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     public List<BoardColumnDTO> getActiveBoardColumns() {
-        return boardColumnRepository.findByActiveIsTrueSortedByPosition().stream()
+        return boardColumnRepository.findByActiveTrueOrderByPositionAsc().stream()
                 .map(boardColumnMapper::toDTO)
                 .collect(Collectors.toList());
     }
@@ -55,7 +55,7 @@ public class BoardColumnService {
         } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Board column not found");
     }
 
-    public void deleteBoardColumn(String id) {
+    public void deleteBoardColumn(long id) {
         boardColumnRepository.deleteById(id);
     }
 }

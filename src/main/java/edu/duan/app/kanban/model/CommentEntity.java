@@ -6,6 +6,13 @@ import lombok.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "comment")
+@SequenceGenerator(
+        name = "comment_generator",
+        sequenceName = "comment_generator_seq",
+        initialValue = 100,
+        allocationSize = 1
+)
 @Getter
 @Setter
 @Builder(setterPrefix = "with")
@@ -13,8 +20,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class CommentEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_generator")
+    private long id;
     @Column(length = 100)
     private String author;
     @Column(length = 5000)

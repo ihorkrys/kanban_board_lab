@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder(setterPrefix = "with")
 public class TaskDTO {
-    private String id;
+    private long id;
     @NotBlank(message = "Title cannot be blank")
     @Size(max = 256, message = "Title length must be less than or equal to 256 characters")
     private String title;

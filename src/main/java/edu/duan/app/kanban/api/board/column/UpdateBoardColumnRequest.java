@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateBoardColumnRequest {
-    @UUID
-    @NotBlank
-    @NotNull
-    private String columnId;
+    private long columnId;
 
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 100, message = "Name length must be less than or equal to 100 characters")

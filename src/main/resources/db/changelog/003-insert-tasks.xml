@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="005-insert-tasks" author="ihorkr">
+        <!-- Задачі для колонки "To Do" -->
+        <insert tableName="task">
+            <column name="id" value="8"/>
+            <column name="title" value="Deploy to Production"/>
+            <column name="description" value="Deploy the application to production"/>
+            <column name="assignee" value="John Doe"/>
+            <column name="created_time" valueDate="2024-01-01 10:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-10 10:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-02 12:00:00"/>
+            <column name="active_column_id" value="1"/>
+        </insert>
+        <insert tableName="task">
+            <column name="id" value="7"/>
+            <column name="title" value="Fix Bugs"/>
+            <column name="description" value="Fix bugs found during review"/>
+            <column name="assignee" value="Alice Smith"/>
+            <column name="created_time" valueDate="2024-01-03 11:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-12 10:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-04 15:00:00"/>
+            <column name="active_column_id" value="1"/>
+        </insert>
+
+        <!-- Задачі для колонки "In Progress" -->
+        <insert tableName="task">
+            <column name="id" value="6"/>
+            <column name="title" value="Develop Feature#2"/>
+            <column name="description" value="Develop the authentication module"/>
+            <column name="assignee" value="Jane Doe"/>
+            <column name="created_time" valueDate="2024-01-05 15:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-20 18:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-06 16:00:00"/>
+            <column name="active_column_id" value="2"/>
+        </insert>
+        <insert tableName="task">
+            <column name="id" value="5"/>
+            <column name="title" value="Code Review"/>
+            <column name="description" value="Review the new feature codebase"/>
+            <column name="assignee" value="Michael Brown"/>
+            <column name="created_time" valueDate="2024-01-07 13:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-15 12:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-08 16:30:00"/>
+            <column name="active_column_id" value="2"/>
+        </insert>
+
+        <!-- Задачі для колонки "Review" -->
+        <insert tableName="task">
+            <column name="id" value="4"/>
+            <column name="title" value="Write Unit Tests"/>
+            <column name="description" value="Write tests for authentication module"/>
+            <column name="assignee" value="Mike Smith"/>
+            <column name="created_time" valueDate="2024-01-08 10:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-12 17:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-09 11:00:00"/>
+            <column name="active_column_id" value="3"/>
+        </insert>
+        <insert tableName="task">
+            <column name="id" value="3"/>
+            <column name="title" value="Develop Feature"/>
+            <column name="description" value="Develop the authentication module"/>
+            <column name="assignee" value="Sophia Taylor"/>
+            <column name="created_time" valueDate="2024-01-10 14:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-18 16:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-11 15:00:00"/>
+            <column name="active_column_id" value="3"/>
+        </insert>
+
+        <!-- Задачі для колонки "QA" -->
+        <insert tableName="task">
+            <column name="id" value="2"/>
+            <column name="title" value="Create Database"/>
+            <column name="description" value="Design and setup the database"/>
+            <column name="assignee" value="Liam Johnson"/>
+            <column name="created_time" valueDate="2024-01-12 09:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-15 18:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-13 10:00:00"/>
+            <column name="active_column_id" value="4"/>
+        </insert>
+        <!-- Задачі для колонки "Done" -->
+        <insert tableName="task">
+            <column name="id" value="1"/>
+            <column name="title" value="Setup Project"/>
+            <column name="description" value="Initialize the project structure"/>
+            <column name="assignee" value="Liam Johnson"/>
+            <column name="created_time" valueDate="2024-01-12 09:00:00"/>
+            <column name="deadline_time" valueDate="2024-01-15 18:00:00"/>
+            <column name="last_updated_time" valueDate="2024-01-13 10:00:00"/>
+            <column name="active_column_id" value="5"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

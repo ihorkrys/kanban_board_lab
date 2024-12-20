@@ -17,6 +17,9 @@ public class CommentMapper {
     }
 
     public CommentDTO toDTO(CommentEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return CommentDTO.builder()
                 .withId(entity.getId())
                 .withAuthor(entity.getAuthor())

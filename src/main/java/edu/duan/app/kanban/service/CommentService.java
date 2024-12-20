@@ -31,7 +31,7 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentDTO createComment(String taskId, String author, String content) {
+    public CommentDTO createComment(long taskId, String author, String content) {
         if (taskRepository.existsById(taskId)) {
 
             CommentEntity savedComment = commentRepository.save(CommentEntity.builder()

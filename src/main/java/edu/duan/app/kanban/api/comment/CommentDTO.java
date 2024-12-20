@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CommentDTO {
 
-    private String id;
+    private long id;
 
     @NotBlank(message = "Author cannot be blank")
     @Size(max = 100, message = "Author name must be less than or equal to 100 characters")

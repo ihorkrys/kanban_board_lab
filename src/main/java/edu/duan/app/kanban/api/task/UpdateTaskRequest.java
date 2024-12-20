@@ -1,9 +1,7 @@
 package edu.duan.app.kanban.api.task;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import edu.duan.app.kanban.validation.UUID;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateTaskRequest {
-    @UUID
-    @NotBlank
-    @NotNull
-    private String taskId;
+    private long taskId;
     @NotBlank(message = "Title cannot be blank")
     @Size(max = 256, message = "Title length must be less than or equal to 256 characters")
     private String title;

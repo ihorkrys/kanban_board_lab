@@ -2,12 +2,17 @@ spring:
   application:
     name: KanBan
   datasource:
-    url: jdbc:postgresql://localhost:5432/kanban_app
+    url: jdbc:postgresql://localhost:5432/kanban_app?schema=public
     username: auto_test
     password: secret
     driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db/master.xml
+    enabled: true
+    drop-first: true
   jpa:
     properties:
       hibernate:
+        ddl_auto: none
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: kanban_app
+      show-sql: true

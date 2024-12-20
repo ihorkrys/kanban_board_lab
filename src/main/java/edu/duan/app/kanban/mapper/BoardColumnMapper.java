@@ -42,6 +42,9 @@ public class BoardColumnMapper {
     }
 
     public BoardColumnDTO toDTO(BoardColumnEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return BoardColumnDTO.builder()
                 .withId(entity.getId())
                 .withName(entity.getName())

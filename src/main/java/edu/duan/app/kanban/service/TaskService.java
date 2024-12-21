@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,8 +34,9 @@ public class TaskService {
 
     @Transactional
     public TaskDTO createTask(TaskDTO task) {
-        TaskEntity taskEntity = taskRepository.save(taskMapper.toEntity(task));
-        return taskMapper.toDTO(taskEntity);
+        TaskEntity newTaskEntity = taskMapper.toEntity(task);
+        newTaskEntity.setCreatedTime(Timestamp.from(Instant.now()));
+        return taskMapper.toDTO(taskRepository.save(taskMapper.toEntity(task)));
     }
 
     public TaskDTO getTaskById(long id) {
@@ -61,8 +64,14 @@ public class TaskService {
 
     public TaskDTO updateTask(TaskDTO updatedTask) {
         if (taskRepository.existsById(updatedTask.getId())) {
-            TaskEntity taskEntity = taskRepository.save(taskMapper.toEntity(updatedTask));
-            return taskMapper.toDTO(taskEntity);
+            TaskEntity requestTaskEntity = taskMapper.toEntity(updatedTask);
+            TaskEntity actualTaskEntity = taskRepository.getReferenceById(updatedTask.getId());
+            actualTaskEntity.setDescription(requestTaskEntity.getDescription());
+            actualTaskEntity.setAssignee(requestTaskEntity.getAssignee());
+            actualTaskEntity.setTitle(requestTaskEntity.getTitle());
+            actualTaskEntity.setDeadlineTime(requestTaskEntity.getDeadlineTime());
+            actualTaskEntity.setLastUpdatedTime(Timestamp.from(Instant.now()));
+            return taskMapper.toDTO(taskRepository.save(actualTaskEntity));
         } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found");
     }
 

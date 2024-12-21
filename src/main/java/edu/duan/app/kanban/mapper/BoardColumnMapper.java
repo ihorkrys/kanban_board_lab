@@ -21,7 +21,7 @@ public class BoardColumnMapper {
 
     public BoardColumnDTO toDTO(UpdateBoardColumnRequest request) {
         return BoardColumnDTO.builder()
-                .withId(request.getColumnId())
+                .withId(request.getId())
                 .withName(request.getName())
                 .withSlug(request.getSlug())
                 .withHexColor(request.getHexColor())

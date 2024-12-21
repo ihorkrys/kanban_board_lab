@@ -4,9 +4,19 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "@tiptap/core": "^2.10.4",
+    "@tiptap/react": "^2.10.4",
+    "@tiptap/starter-kit": "^2.10.4",
+    "@uiw/react-md-editor": "^4.0.5",
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.7",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1"
   },
   "scripts": {

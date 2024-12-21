@@ -12,7 +12,7 @@
             <column name="slug" value="todo"/>
             <column name="hex_color" value="#FF5733"/>
             <column name="active" valueBoolean="true"/>
-            <column name="position" value="1"/>
+            <column name="position" value="0"/>
         </insert>
         <insert tableName="board_column">
             <column name="id" value="2"/>
@@ -20,7 +20,7 @@
             <column name="slug" value="inprogress"/>
             <column name="hex_color" value="#33C4FF"/>
             <column name="active" valueBoolean="true"/>
-            <column name="position" value="2"/>
+            <column name="position" value="1"/>
         </insert>
         <insert tableName="board_column">
             <column name="id" value="3"/>
@@ -28,7 +28,7 @@
             <column name="slug" value="review"/>
             <column name="hex_color" value="#FFC300"/>
             <column name="active" valueBoolean="true"/>
-            <column name="position" value="3"/>
+            <column name="position" value="2"/>
         </insert>
         <insert tableName="board_column">
             <column name="id" value="4"/>
@@ -36,7 +36,7 @@
             <column name="slug" value="qa"/>
             <column name="hex_color" value="#33FF57"/>
             <column name="active" valueBoolean="true"/>
-            <column name="position" value="4"/>
+            <column name="position" value="3"/>
         </insert>
         <insert tableName="board_column">
             <column name="id" value="5"/>
@@ -44,7 +44,7 @@
             <column name="slug" value="done"/>
             <column name="hex_color" value="#A9A9A9"/>
             <column name="active" valueBoolean="false"/>
-            <column name="position" value="5"/>
+            <column name="position" value="4"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

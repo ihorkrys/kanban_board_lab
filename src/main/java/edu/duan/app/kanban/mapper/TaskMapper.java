@@ -1,11 +1,15 @@
 package edu.duan.app.kanban.mapper;
 
+import edu.duan.app.kanban.api.comment.CommentDTO;
 import edu.duan.app.kanban.api.task.AddTaskRequest;
 import edu.duan.app.kanban.api.task.TaskDTO;
 import edu.duan.app.kanban.api.task.UpdateTaskRequest;
+import edu.duan.app.kanban.model.CommentEntity;
 import edu.duan.app.kanban.model.TaskEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class TaskMapper {
@@ -30,7 +34,7 @@ public class TaskMapper {
 
     public TaskDTO toDTO(UpdateTaskRequest request) {
         return TaskDTO.builder()
-                .withId(request.getTaskId())
+                .withId(request.getId())
                 .withTitle(request.getTitle())
                 .withDescription(request.getDescription())
                 .withAssignee(request.getAssignee())
@@ -62,8 +66,16 @@ public class TaskMapper {
                         .withCreatedTime(DateTimeMapper.toLocalDateTime(entity.getCreatedTime()))
                         .withDeadlineTime(DateTimeMapper.toLocalDateTime(entity.getDeadlineTime()))
                         .withLastUpdatedTime(DateTimeMapper.toLocalDateTime(entity.getLastUpdatedTime()))
-                .withComments(entity.getCommentaries().stream().map(commentMapper::toDTO).toList())
+                .withComments(toDTO(entity.getCommentaries()))
                 .withActiveColumn(boardColumnMapper.toDTO(entity.getActiveColumn()))
                 .build();
+    }
+
+    private List<CommentDTO> toDTO(List<CommentEntity> entities) {
+        if (entities == null) {
+            return List.of();
+        } else {
+            return entities.stream().map(commentMapper::toDTO).toList();
+        }
     }
 }

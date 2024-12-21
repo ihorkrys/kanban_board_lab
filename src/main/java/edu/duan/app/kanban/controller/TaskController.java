@@ -21,7 +21,7 @@ public class TaskController {
         this.taskMapper = taskMapper;
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<AddTaskResponse> addTask(@Valid @RequestBody AddTaskRequest request) {
         AddTaskResponse response = new AddTaskResponse(taskService.createTask(taskMapper.toDTO(request)));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -33,13 +33,13 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UpdateTaskResponse> updateTask(@Valid @RequestBody UpdateTaskRequest request) {
         TaskDTO updatedTask = taskService.updateTask(taskMapper.toDTO(request));
         return new ResponseEntity<>(new UpdateTaskResponse(updatedTask), HttpStatus.OK);
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<RemoveTaskResponse> removeTask(@PathVariable long id) {
         taskService.deleteTask(id);
         return new ResponseEntity<>(new RemoveTaskResponse(), HttpStatus.OK);
@@ -47,7 +47,7 @@ public class TaskController {
 
     @PostMapping("/set-column")
     public ResponseEntity<SetTaskColumnResponse> setTaskColumn(@Valid @RequestBody SetTaskColumnRequest request) {
-        TaskDTO taskDTO = taskService.setColumnToTask(request.getTaskId(), request.getColumnSlug());
+        TaskDTO taskDTO = taskService.setColumnToTask(request.getId(), request.getColumnSlug());
         return new ResponseEntity<>(new SetTaskColumnResponse(taskDTO), HttpStatus.OK);
     }
 }

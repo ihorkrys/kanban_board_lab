@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Board from './pages/Board';
+import Header from './pages/Header';
+import Footer from './pages/Footer';
+import ColumnManager from "./pages/column/ColumnManager";
 
 function App() {
-    const [message, setMessage] = useState('');
-
-    useEffect(() => {
-        fetch('/api/hello')
-            .then(response => response.text())
-            .then(data => setMessage(data))
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
-
     return (
-        <div>
-            <h1>React + Spring Boot + KanBan</h1>
-            <p>{message}</p>
-        </div>
-    );
+        <Router>
+            <div className="d-flex flex-column min-vh-100">
+                <Header/>
+                <main className="flex-grow-1">
+                    <Routes>
+                        <Route path="/" element={<Board/>}/>
+                        <Route path="/column/manager" element={<ColumnManager/>}/>
+                    </Routes>
+                </main>
+                <Footer />
+            </div>
+        </Router>
+);
 }
 
 export default App;

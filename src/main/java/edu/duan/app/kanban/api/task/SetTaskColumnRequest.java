@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SetTaskColumnRequest {
-    private long taskId;
+    private long id;
     @NotBlank(message = "Slug cannot be blank")
     @Size(max = 25, message = "Slug length must be less than or equal to 25 characters")
     private String columnSlug;

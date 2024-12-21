@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateTaskRequest {
-    private long taskId;
+    private long id;
     @NotBlank(message = "Title cannot be blank")
     @Size(max = 256, message = "Title length must be less than or equal to 256 characters")
     private String title;

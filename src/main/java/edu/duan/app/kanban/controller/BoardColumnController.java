@@ -20,19 +20,19 @@ public class BoardColumnController {
         this.boardColumnMapper = boardColumnMapper;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<AddBoardColumnResponse> addBoardColumn(@RequestBody AddBoardColumnRequest request) {
         BoardColumnDTO createdColumn = boardColumnService.createBoardColumn(boardColumnMapper.toDTO(request));
         return new ResponseEntity<>(new AddBoardColumnResponse(createdColumn), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UpdateBoardColumnResponse> updateBoardColumn(@RequestBody UpdateBoardColumnRequest request) {
         BoardColumnDTO updateColumn = boardColumnService.updateBoardColumn(boardColumnMapper.toDTO(request));
         return new ResponseEntity<>(new UpdateBoardColumnResponse(updateColumn), HttpStatus.OK);
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<RemoveBoardColumnResponse> removeBoardColumn(@PathVariable long id) {
         boardColumnService.deleteBoardColumn(id);
         return new ResponseEntity<>(new RemoveBoardColumnResponse(), HttpStatus.OK);

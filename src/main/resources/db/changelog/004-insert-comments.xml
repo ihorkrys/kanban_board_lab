@@ -15,7 +15,7 @@
         <insert tableName="comment">
             <column name="id" value="2"/>
             <column name="author" value="Jane Doe"/>
-            <column name="content" value="Authentication feature is in progress"/>
+            <column name="content" value="~~some comment~~ *Ok*, let's fix **all bugs**!"/>
             <column name="publish_date" valueDate="2024-01-05 17:00:00"/>
         </insert>
         <insert tableName="task_commentaries">

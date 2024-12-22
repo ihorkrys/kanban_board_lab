@@ -35,7 +35,9 @@ function Comments({ comments, onAddComment }) {
                             }}
                         >
                             <strong style={{color: '#007bff'}}>{comment.author || 'Anonymous'}:</strong>
-                            <p className="mb-1" style={{margin: '5px 0', color: '#555'}}>{comment.content}</p>
+                            <div data-color-mode="light">
+                                <MDEditor.Markdown source={comment.content}/>
+                            </div>
                             <small className="text-muted">
                                 {new Date(comment.publishDate).toLocaleString()}
                             </small>

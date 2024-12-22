@@ -19,8 +19,8 @@
         </insert>
         <insert tableName="task">
             <column name="id" value="7"/>
-            <column name="title" value="Fix Bugs"/>
-            <column name="description" value="Fix bugs found during review"/>
+            <column name="title" value="Fix Bugs(with markdown)"/>
+            <column name="description" value="**Hello world!!!**"/>
             <column name="assignee" value="Alice Smith"/>
             <column name="created_time" valueDate="2024-01-03 11:00:00"/>
             <column name="deadline_time" valueDate="2024-01-12 10:00:00"/>
